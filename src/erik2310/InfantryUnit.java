@@ -26,6 +26,7 @@ public abstract class InfantryUnit {
     public void attack(InfantryUnit unit) {
         int attackDamage = (int) (Math.random() * damage) + 1;
         unit.takeDamage(attackDamage);
+
     }
 
 }
