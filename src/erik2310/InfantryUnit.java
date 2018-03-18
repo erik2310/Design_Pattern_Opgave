@@ -7,6 +7,7 @@ public abstract class InfantryUnit {
     int armor;
     int hits;
     int damage;
+    boolean dead = false;
 
     public InfantryUnit(int range, int armor, int hits, int damage) {
         this.range = range;
@@ -29,4 +30,11 @@ public abstract class InfantryUnit {
 
     }
 
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
 }
