@@ -9,6 +9,7 @@ public abstract class InfantryUnit {
     int damage;
     boolean dead = false;
 
+    // Constructor som tager imod range, armor, hits og damage som arguments
     public InfantryUnit(int range, int armor, int hits, int damage) {
         this.range = range;
         this.armor = armor;
@@ -16,6 +17,7 @@ public abstract class InfantryUnit {
         this.damage = damage;
     }
 
+    // Metode til at lave skade
     public void takeDamage(int damage) {
         int reduction = (int) (Math.random() * armor);
 
@@ -24,16 +26,19 @@ public abstract class InfantryUnit {
         }
     }
 
+    // Metode til at angribe
     public void attack(InfantryUnit unit) {
         int attackDamage = (int) (Math.random() * damage) + 1;
         unit.takeDamage(attackDamage);
 
     }
 
+    // Getter til dead
     public boolean isDead() {
         return dead;
     }
 
+    // Sætter til dead
     public void setDead(boolean dead) {
         this.dead = dead;
     }
