@@ -8,23 +8,23 @@ public class OrcInfantryFactory extends InfantryFactory {
 
         switch (techLevel) {
             case 1:
-                character = new RockHauler();
+                character = new OrcRockHauler();
                 character.setRace("Orc");
                 break;
             case 2:
-                character = new SpearThrower();
+                character = new OrcSpearThrower();
                 character.setRace("Orc");
                 break;
             case 3:
-                character = new Musketeer();
+                character = new OrcMusketeer();
                 character.setRace("Orc");
                 break;
             case 4:
-                character = new CrossbowMan();
+                character = new OrcCrossbowMan();
                 character.setRace("Orc");
                 break;
             case 5:
-                character = new Archer();
+                character = new OrcArcher();
                 character.setRace("Orc");
                 break;
             default:
