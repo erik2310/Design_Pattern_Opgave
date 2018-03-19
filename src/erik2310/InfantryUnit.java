@@ -8,6 +8,7 @@ public abstract class InfantryUnit {
     int hits;
     int damage;
     boolean dead = false;
+    String race;
 
     // Constructor som tager imod range, armor, hits og damage som arguments
     public InfantryUnit(int range, int armor, int hits, int damage) {
@@ -41,5 +42,15 @@ public abstract class InfantryUnit {
     // Sætter til dead
     public void setDead(boolean dead) {
         this.dead = dead;
+    }
+
+    // Getter til race
+    public String getRace() {
+        return race;
+    }
+
+    // Sætter til race
+    public void setRace(String race) {
+        this.race = race;
     }
 }
