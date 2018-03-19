@@ -3,7 +3,7 @@ package erik2310;
 public class FactoryFactory {
 
     // En metode der returner en indstans af en factory afhængig af race tal
-    public InfantryFactory createInfantryFactory(int race) {
+    public static InfantryFactory createInfantryFactory(int race) {
         InfantryFactory factory;
         switch (race) {
             case 1:

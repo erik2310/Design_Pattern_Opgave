@@ -6,6 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //Laver factories
+        InfantryFactory humanFactory = FactoryFactory.createInfantryFactory(1);
+        InfantryFactory orcFactory = FactoryFactory.createInfantryFactory(2);
+
         // Laver et random objekt af klassen Random
         Random random = new Random();
 
@@ -13,14 +17,14 @@ public class Main {
         int randomTal;
 
         // Laver spillets karakterer som objekter
-        Archer archer = new Archer();
-        CrossbowMan crossbowMan = new CrossbowMan();
-        Musketeer musketeer = new Musketeer();
-        RockHauler rockHauler = new RockHauler();
-        SpearThrower spearThrower = new SpearThrower();
+        InfantryUnit archer = humanFactory.createUnit(5);
+        InfantryUnit crossbowMan = humanFactory.createUnit(4);
+        InfantryUnit musketeer = humanFactory.createUnit(3);
+        InfantryUnit orcRockHauler = orcFactory.createUnit(1);
+        InfantryUnit orcSpearThrower = orcFactory.createUnit(2);
 
         // Kører while loop mens karaktererne er levende
-        while (archer.hits > 0 || crossbowMan.hits > 0 || musketeer.hits > 0 || rockHauler.hits > 0 || spearThrower.hits > 0) {
+        while (archer.hits > 0 || crossbowMan.hits > 0 || musketeer.hits > 0 || orcRockHauler.hits > 0 || orcSpearThrower.hits > 0) {
 
             // Laver et tilfældigt tal
             randomTal = random.nextInt(4);
@@ -45,17 +49,17 @@ public class Main {
                     + "Damage: " + musketeer.damage + "\n"
                     + "Range: " + musketeer.range + "\n");
 
-            System.out.println("RockHauler:" + "\n"
-                    + "Armor: " + rockHauler.armor + "\n"
-                    + "Hits: " + rockHauler.hits + "\n"
-                    + "Damage: " + rockHauler.damage + "\n"
-                    + "Range: " + rockHauler.range + "\n");
+            System.out.println("OrcRockHauler:" + "\n"
+                    + "Armor: " + orcRockHauler.armor + "\n"
+                    + "Hits: " + orcRockHauler.hits + "\n"
+                    + "Damage: " + orcRockHauler.damage + "\n"
+                    + "Range: " + orcRockHauler.range + "\n");
 
-            System.out.println("SpearThrower:" + "\n"
-                    + "Armor: " + spearThrower.armor + "\n"
-                    + "Hits: " + spearThrower.hits + "\n"
-                    + "Damage: " + spearThrower.damage + "\n"
-                    + "Range: " + spearThrower.range + "\n");
+            System.out.println("OrcSpearThrower:" + "\n"
+                    + "Armor: " + orcSpearThrower.armor + "\n"
+                    + "Hits: " + orcSpearThrower.hits + "\n"
+                    + "Damage: " + orcSpearThrower.damage + "\n"
+                    + "Range: " + orcSpearThrower.range + "\n");
                     */
 
             // Hvis archer er død gør han ikke noget
@@ -86,33 +90,33 @@ public class Main {
                         System.out.println("Musketeer døde!" + "\n");
                         musketeer.setDead(true);
                     }
-                    // Kører hvis randomTal er 2 og rockHauler ikke er død
-                } else if (randomTal == 2 && !rockHauler.isDead()) {
-                    // Archer angriber rockHauler
-                    archer.attack(rockHauler);
-                    System.out.println("Archer angriber RockHauler!" + "\n");
+                    // Kører hvis randomTal er 2 og orcRockHauler ikke er død
+                } else if (randomTal == 2 && !orcRockHauler.isDead()) {
+                    // Archer angriber orcRockHauler
+                    archer.attack(orcRockHauler);
+                    System.out.println("Archer angriber OrcRockHauler!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis rockHauler dør
-                    if (rockHauler.hits < 0) {
-                        System.out.println("RockHauler døde!" + "\n");
-                        rockHauler.setDead(true);
+                    // Kører hvis orcRockHauler dør
+                    if (orcRockHauler.hits < 0) {
+                        System.out.println("OrcRockHauler døde!" + "\n");
+                        orcRockHauler.setDead(true);
                     }
-                    // Kører hvis randomTal er 3 og spearThrower ikke er død
-                } else if (randomTal == 3 && !spearThrower.isDead()) {
-                    // Archer angriber spearThrower
-                    archer.attack(spearThrower);
-                    System.out.println("Archer angriber SpearThrower!" + "\n");
+                    // Kører hvis randomTal er 3 og orcSpearThrower ikke er død
+                } else if (randomTal == 3 && !orcSpearThrower.isDead()) {
+                    // Archer angriber orcSpearThrower
+                    archer.attack(orcSpearThrower);
+                    System.out.println("Archer angriber OrcSpearThrower!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis spearThrower dør
-                    if (spearThrower.hits < 0) {
-                        System.out.println("SpearThrower døde!" + "\n");
-                        spearThrower.setDead(true);
+                    // Kører hvis orcSpearThrower dør
+                    if (orcSpearThrower.hits < 0) {
+                        System.out.println("OrcSpearThrower døde!" + "\n");
+                        orcSpearThrower.setDead(true);
                     }
                 }
                 // Hvis alle de andre er døde så har Archer vundet
-                if (crossbowMan.hits < 0 && musketeer.hits < 0 && rockHauler.hits < 0 && spearThrower.hits < 0) {
+                if (crossbowMan.hits < 0 && musketeer.hits < 0 && orcRockHauler.hits < 0 && orcSpearThrower.hits < 0) {
                     System.out.println("Archer har vundet!" + "\n");
                     System.exit(0);
                 }
@@ -146,33 +150,33 @@ public class Main {
                         System.out.println("Musketeer døde!" + "\n");
                         musketeer.setDead(true);
                     }
-                    // Kører hvis randomTal er 2 og rockHauler ikke er død
-                } else if (randomTal == 2 && !rockHauler.isDead()) {
-                    // crossbowMan angriber rockHauler
-                    crossbowMan.attack(rockHauler);
-                    System.out.println("CrossbowMan angriber RockHauler!" + "\n");
+                    // Kører hvis randomTal er 2 og orcRockHauler ikke er død
+                } else if (randomTal == 2 && !orcRockHauler.isDead()) {
+                    // crossbowMan angriber orcRockHauler
+                    crossbowMan.attack(orcRockHauler);
+                    System.out.println("CrossbowMan angriber OrcRockHauler!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis rockHauler dør
-                    if (rockHauler.hits < 0) {
-                        System.out.println("RockHauler døde!" + "\n");
-                        rockHauler.setDead(true);
+                    // Kører hvis orcRockHauler dør
+                    if (orcRockHauler.hits < 0) {
+                        System.out.println("OrcRockHauler døde!" + "\n");
+                        orcRockHauler.setDead(true);
                     }
-                    // Kører hvis randomTal er 3 og spearThrower ikke er død
-                } else if (randomTal == 3 && !spearThrower.isDead()) {
-                    // crossbowMan angriber spearThrower
-                    crossbowMan.attack(spearThrower);
-                    System.out.println("CrossbowMan angriber SpearThrower!" + "\n");
+                    // Kører hvis randomTal er 3 og orcSpearThrower ikke er død
+                } else if (randomTal == 3 && !orcSpearThrower.isDead()) {
+                    // crossbowMan angriber orcSpearThrower
+                    crossbowMan.attack(orcSpearThrower);
+                    System.out.println("CrossbowMan angriber OrcSpearThrower!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis spearThrower dør
-                    if (spearThrower.hits < 0) {
-                        System.out.println("SpearThrower døde!" + "\n");
-                        spearThrower.setDead(true);
+                    // Kører hvis orcSpearThrower dør
+                    if (orcSpearThrower.hits < 0) {
+                        System.out.println("OrcSpearThrower døde!" + "\n");
+                        orcSpearThrower.setDead(true);
                     }
                 }
                 // Hvis alle de andre er døde så har crossbowMan vundet
-                if (archer.hits < 0 && musketeer.hits < 0 && rockHauler.hits < 0 && spearThrower.hits < 0) {
+                if (archer.hits < 0 && musketeer.hits < 0 && orcRockHauler.hits < 0 && orcSpearThrower.hits < 0) {
                     System.out.println("CrossbowMan har vundet!" + "\n");
                     System.exit(0);
                 }
@@ -206,47 +210,47 @@ public class Main {
                         System.out.println("CrossbowMan døde!" + "\n");
                         crossbowMan.setDead(true);
                     }
-                    // Kører hvis randomTal er 2 og rockHauler ikke er død
-                } else if (randomTal == 2 && !rockHauler.isDead()) {
-                    // Musketeer angriber rockHauler
-                    musketeer.attack(rockHauler);
-                    System.out.println("Musketeer angriber RockHauler!" + "\n");
+                    // Kører hvis randomTal er 2 og orcRockHauler ikke er død
+                } else if (randomTal == 2 && !orcRockHauler.isDead()) {
+                    // Musketeer angriber orcRockHauler
+                    musketeer.attack(orcRockHauler);
+                    System.out.println("Musketeer angriber OrcRockHauler!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis rockHauler dør
-                    if (rockHauler.hits < 0) {
-                        System.out.println("RockHauler døde!" + "\n");
-                        rockHauler.setDead(true);
+                    // Kører hvis orcRockHauler dør
+                    if (orcRockHauler.hits < 0) {
+                        System.out.println("OrcRockHauler døde!" + "\n");
+                        orcRockHauler.setDead(true);
                     }
-                    // Kører hvis randomTal er 3 og spearThrower ikke er død
-                } else if (randomTal == 3 && !spearThrower.isDead()) {
-                    // Musketeer angriber spearThrower
-                    musketeer.attack(spearThrower);
-                    System.out.println("Musketeer angriber SpearThrower!" + "\n");
+                    // Kører hvis randomTal er 3 og orcSpearThrower ikke er død
+                } else if (randomTal == 3 && !orcSpearThrower.isDead()) {
+                    // Musketeer angriber orcSpearThrower
+                    musketeer.attack(orcSpearThrower);
+                    System.out.println("Musketeer angriber OrcSpearThrower!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis spearThrower dør
-                    if (spearThrower.hits < 0) {
-                        System.out.println("SpearThrower døde!" + "\n");
-                        spearThrower.setDead(true);
+                    // Kører hvis orcSpearThrower dør
+                    if (orcSpearThrower.hits < 0) {
+                        System.out.println("OrcSpearThrower døde!" + "\n");
+                        orcSpearThrower.setDead(true);
                     }
                 }
                 // Hvis alle de andre er døde så har musketeer vundet
-                if (archer.hits < 0 && crossbowMan.hits < 0 && rockHauler.hits < 0 && spearThrower.hits < 0) {
+                if (archer.hits < 0 && crossbowMan.hits < 0 && orcRockHauler.hits < 0 && orcSpearThrower.hits < 0) {
                     System.out.println("Musketeer har vundet!" + "\n");
                     System.exit(0);
                 }
             }
 
-            // Hvis spearThrower er død gør han ikke noget
-            if (spearThrower.hits < 0) {
+            // Hvis orcSpearThrower er død gør han ikke noget
+            if (orcSpearThrower.hits < 0) {
 
             } else {
                 // Kører hvis randomTal er 0 og archer ikke er død
                 if (randomTal == 0 && !archer.isDead()) {
-                    // spearThrower angriber archer
-                    spearThrower.attack(archer);
-                    System.out.println("SpearThrower angriber Archer!" + "\n");
+                    // orcSpearThrower angriber archer
+                    orcSpearThrower.attack(archer);
+                    System.out.println("OrcSpearThrower angriber Archer!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
                     // Kører hvis archer dør
@@ -256,9 +260,9 @@ public class Main {
                     }
                     // Kører hvis randomTal er 1 og crossbowMan ikke er død
                 } else if (randomTal == 1 && !crossbowMan.isDead()) {
-                    // spearThrower angriber crossbowMan
-                    spearThrower.attack(crossbowMan);
-                    System.out.println("SpearThrower angriber CrossbowMan!" + "\n");
+                    // orcSpearThrower angriber crossbowMan
+                    orcSpearThrower.attack(crossbowMan);
+                    System.out.println("OrcSpearThrower angriber CrossbowMan!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
                     // Kører hvis crossbowMan dør
@@ -266,23 +270,23 @@ public class Main {
                         System.out.println("CrossbowMan døde!" + "\n");
                         crossbowMan.setDead(true);
                     }
-                    // Kører hvis randomTal er 2 og rockHauler ikke er død
-                } else if (randomTal == 2 && !rockHauler.isDead()) {
-                    // spearThrower angriber rockHauler
-                    spearThrower.attack(rockHauler);
-                    System.out.println("SpearThrower angriber RockHauler!" + "\n");
+                    // Kører hvis randomTal er 2 og orcRockHauler ikke er død
+                } else if (randomTal == 2 && !orcRockHauler.isDead()) {
+                    // orcSpearThrower angriber orcRockHauler
+                    orcSpearThrower.attack(orcRockHauler);
+                    System.out.println("OrcSpearThrower angriber OrcRockHauler!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis rockHauler dør
-                    if (rockHauler.hits < 0) {
-                        System.out.println("RockHauler døde!" + "\n");
-                        rockHauler.setDead(true);
+                    // Kører hvis orcRockHauler dør
+                    if (orcRockHauler.hits < 0) {
+                        System.out.println("OrcRockHauler døde!" + "\n");
+                        orcRockHauler.setDead(true);
                     }
                     // Kører hvis randomTal er 3 og musketeer ikke er død
                 } else if (randomTal == 3 && !musketeer.isDead()) {
-                    // spearThrower angriber musketeer
-                    spearThrower.attack(musketeer);
-                    System.out.println("SpearThrower angriber Musketeer!" + "\n");
+                    // orcSpearThrower angriber musketeer
+                    orcSpearThrower.attack(musketeer);
+                    System.out.println("OrcSpearThrower angriber Musketeer!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
                     // Kører hvis musketeer dør
@@ -291,22 +295,22 @@ public class Main {
                         musketeer.setDead(true);
                     }
                 }
-                // Hvis alle de andre er døde så har spearThrower vundet
-                if (archer.hits < 0 && crossbowMan.hits < 0 && rockHauler.hits < 0 && musketeer.hits < 0) {
-                    System.out.println("SpearThrower har vundet!" + "\n");
+                // Hvis alle de andre er døde så har orcSpearThrower vundet
+                if (archer.hits < 0 && crossbowMan.hits < 0 && orcRockHauler.hits < 0 && musketeer.hits < 0) {
+                    System.out.println("OrcSpearThrower har vundet!" + "\n");
                     System.exit(0);
                 }
             }
 
-            // Hvis rockHauler er død gør han ikke noget
-            if (rockHauler.hits < 0) {
+            // Hvis orcRockHauler er død gør han ikke noget
+            if (orcRockHauler.hits < 0) {
 
             } else {
                 // Kører hvis randomTal er 0 og archer ikke er død
                 if (randomTal == 0 && !archer.isDead()) {
-                    // Rockhauler angriber archer
-                    rockHauler.attack(archer);
-                    System.out.println("RockHauler angriber Archer!" + "\n");
+                    // OrcRockhauler angriber archer
+                    orcRockHauler.attack(archer);
+                    System.out.println("OrcRockHauler angriber Archer!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
                     // Kører hvis archer dør
@@ -316,9 +320,9 @@ public class Main {
                     }
                     // Kører hvis randomTal er 1 og crossbowMan ikke er død
                 } else if (randomTal == 1 && !crossbowMan.isDead()) {
-                    // Rockhauler angriber crossbowMan
-                    rockHauler.attack(crossbowMan);
-                    System.out.println("RockHauler angriber CrossbowMan!" + "\n");
+                    // OrcRockhauler angriber crossbowMan
+                    orcRockHauler.attack(crossbowMan);
+                    System.out.println("OrcRockHauler angriber CrossbowMan!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
                     // Kører hvis crossbowMan dør
@@ -326,23 +330,23 @@ public class Main {
                         System.out.println("CrossbowMan døde!" + "\n");
                         crossbowMan.setDead(true);
                     }
-                    // Kører hvis randomTal er 2 og spearThrower ikke er død
-                } else if (randomTal == 2 && !spearThrower.isDead()) {
-                    // Rockhauler angriber spearThrower
-                    rockHauler.attack(spearThrower);
-                    System.out.println("RockHauler angriber SpearThrower!" + "\n");
+                    // Kører hvis randomTal er 2 og orcSpearThrower ikke er død
+                } else if (randomTal == 2 && !orcSpearThrower.isDead()) {
+                    // OrcRockhauler angriber orcSpearThrower
+                    orcRockHauler.attack(orcSpearThrower);
+                    System.out.println("OrcRockHauler angriber OrcSpearThrower!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
-                    // Kører hvis spearThrower dør
-                    if (spearThrower.hits < 0) {
-                        System.out.println("SpearThrower døde!" + "\n");
-                        spearThrower.setDead(true);
+                    // Kører hvis orcSpearThrower dør
+                    if (orcSpearThrower.hits < 0) {
+                        System.out.println("OrcSpearThrower døde!" + "\n");
+                        orcSpearThrower.setDead(true);
                     }
                     // Kører hvis randomTal er 3 og musketeer ikke er død
                 } else if (randomTal == 3 && !musketeer.isDead()) {
-                    // RockHauler angriber musketeer
-                    rockHauler.attack(musketeer);
-                    System.out.println("RockHauler angriber Musketeer!" + "\n");
+                    // OrcRockHauler angriber musketeer
+                    orcRockHauler.attack(musketeer);
+                    System.out.println("OrcRockHauler angriber Musketeer!" + "\n");
                     // Laver et tilfældigt tal
                     randomTal = random.nextInt(4);
                     // Kører hvis musketeer dør
@@ -351,9 +355,9 @@ public class Main {
                         musketeer.setDead(true);
                     }
                 }
-                // Hvis alle de andre er døde så har rockHauler vundet
-                if (archer.hits < 0 && crossbowMan.hits < 0 && spearThrower.hits < 0 && musketeer.hits < 0) {
-                    System.out.println("RockHauler har vundet!" + "\n");
+                // Hvis alle de andre er døde så har orcRockHauler vundet
+                if (archer.hits < 0 && crossbowMan.hits < 0 && orcSpearThrower.hits < 0 && musketeer.hits < 0) {
+                    System.out.println("OrcRockHauler har vundet!" + "\n");
                     System.exit(0);
                 }
             }
