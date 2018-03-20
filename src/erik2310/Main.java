@@ -6,6 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Laver en world
+        World world = World.ONEINSTANS;
+
         //Laver factories
         InfantryFactory humanFactory = FactoryFactory.createInfantryFactory(1);
         InfantryFactory orcFactory = FactoryFactory.createInfantryFactory(2);
